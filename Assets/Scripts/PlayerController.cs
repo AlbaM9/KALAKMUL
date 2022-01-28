@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     public Text munCount;
     //public LayerMask hittablelayers;
 
-    
+    public Camera mainCamera;
+    public Camera shootCam;
 
     public Transform cam;
     public int lvl;
@@ -40,8 +41,8 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-       
-        
+
+        shootCam.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         anim = GetComponent<Animator>();
@@ -82,7 +83,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
 
-            
+            mainCamera.enabled = false;
+            shootCam.enabled = true;
             anim.SetBool("FireON", true);
             weapon.gameObject.SetActive(true); //el arma aparece.
             pSpeed = 0.5f;
@@ -99,6 +101,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.SetBool("FireON", false);
+            mainCamera.enabled = true;
+            shootCam.enabled = false;
             weapon.gameObject.SetActive(false);
         }
 
